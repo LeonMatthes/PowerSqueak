@@ -3,7 +3,7 @@ sudo: false
 
 smalltalk_edge:
   source: MrModder/smalltalkCI
-  branch: master
+  branch: lcov
 
 os:
   - linux
@@ -20,3 +20,8 @@ matrix:
   allow_failures:
     - smalltalk: Squeak32-5.0
     - smalltalk: Squeak64-trunk
+   
+after_success:
+  - ls -a .
+  - pwd
+  - bash <(curl -s https://codecov.io/bash)
