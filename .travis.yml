@@ -24,4 +24,5 @@ matrix:
 after_success:
   - ls -a .
   - pwd
-  - bash <(curl -s https://codecov.io/bash)
+  - echo "${SMALLTALK_CI_BUILD}"
+  - bash <(curl -s https://codecov.io/bash) -f "${SMALLTAK_CI_BUILD}"/lcov.info
