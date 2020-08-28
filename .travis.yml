@@ -24,4 +24,4 @@ matrix:
 after_success:
   - bash <(curl -s https://codecov.io/bash) -s "${SMALLTALK_CI_BUILD}"
   - npm install -g coveralls
-  - cat $"{SMALLTALK_CI_BUILD}/lcov.info" | coveralls
+  - cat "${SMALLTALK_CI_BUILD}/lcov.info" | coveralls
