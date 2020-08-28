@@ -1,0 +1,57 @@
+name: Smalltalk-CI
+
+on:
+  push:
+    branches: [ smalltalkci-beta ]
+  pull_request:
+    branches: [ smalltalkci-beta ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        smalltalk: [ Squeak64-trunk, Squeak64-5.3 ]
+        os: [ubuntu-latest]
+    name: ${{ matrix.smalltalk }} on ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: hpi-swa/setup-smalltalkCI@1.1.0
+        with:
+          smalltalk-version: ${{matrix.smalltalk}}
+          smalltalkCI-source: 'MrModder/smalltalkCI'
+          smalltalkCI-branch: 'lcov'
+      - run: smalltalkci -s ${{ matrix.smalltalk }}
+        shell: bash
+        timeout-minutes: 15
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v1.1.1
+        with:
+          # 
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # Path to lcov file
+          path-to-lcov: /home/runner/.smalltalkCI/_builds/lcov.info
+          parallel: true
+          flag-name: run-${{matrix.smalltalk}}
+          
+      - uses: codecov/codecov-action@v1
+        with:
+          file: /home/runner/.smalltalkCI/_builds/lcov.info
+          name: ${{matrix.smalltalk}}
+          fail_ci_if_error: true
+
+      
+
+  finish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls Finished
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.github_token }}
+        parallel-finished: true
