@@ -25,4 +25,4 @@ after_success:
   - ls -a .
   - pwd
   - echo "${SMALLTALK_CI_BUILD}"
-  - bash <(curl -s https://codecov.io/bash) -f "${SMALLTAK_CI_BUILD}"/lcov.info
+  - bash <(curl -s https://codecov.io/bash) -f "${SMALLTALK_CI_BUILD}"/lcov.info
