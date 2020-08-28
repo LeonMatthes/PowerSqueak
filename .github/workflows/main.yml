@@ -2,9 +2,9 @@ name: Smalltalk-CI
 
 on:
   push:
-    branches: [ smalltalkci-beta ]
+    branches: [ smalltalkci-beta, master ]
   pull_request:
-    branches: [ smalltalkci-beta ]
+    branches: [ smalltalkci-beta, master ]
 
 jobs:
   test:
