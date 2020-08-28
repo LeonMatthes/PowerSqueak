@@ -22,7 +22,6 @@ matrix:
     - smalltalk: Squeak64-trunk
    
 after_success:
-  - ls -a .
-  - pwd
-  - echo "${SMALLTALK_CI_BUILD}"
   - bash <(curl -s https://codecov.io/bash) -s "${SMALLTALK_CI_BUILD}"
+  - npm install -g coveralls
+  - cat $"{SMALLTALK_CI_BUILD}/lcov.info" | coveralls
