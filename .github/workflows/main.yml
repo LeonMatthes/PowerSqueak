@@ -33,14 +33,11 @@ jobs:
         with:
           # 
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          # Path to lcov file
-          path-to-lcov: /home/runner/.smalltalkCI/_builds/lcov.info
           parallel: true
           flag-name: run-${{matrix.os}}-${{matrix.smalltalk}}
           
       - uses: codecov/codecov-action@v1
         with:
-          file: /home/runner/.smalltalkCI/_builds/lcov.info
           name: ${{matrix.smalltalk}}
           fail_ci_if_error: true
 
