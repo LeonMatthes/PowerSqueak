@@ -7,7 +7,8 @@
 	"commentStamp" : "VO 7/25/2019 15:00",
 	"instvars" : [
 		"resizeHandles",
-		"content" ],
+		"content",
+		"aspectRatio" ],
 	"name" : "PSContentContainer",
 	"pools" : [
 		 ],
