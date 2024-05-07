@@ -1,4 +1,5 @@
 slide miniatures
 updateCurrentMiniature
 
-	self currentMiniature updateImage
+	self presentationMode
+		ifFalse: [self currentMiniature updateImage].
