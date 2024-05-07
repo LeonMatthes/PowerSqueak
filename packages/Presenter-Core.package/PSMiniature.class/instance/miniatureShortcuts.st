@@ -2,5 +2,5 @@ shortcuts
 miniatureShortcuts
 
 	^ Dictionary withAll: {
-		Character delete -> self deleteHighlightedMiniature
+		Character delete -> [self deleteHighlightedMiniature].
 		}
